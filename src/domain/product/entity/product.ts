@@ -1,20 +1,22 @@
-export default class Product {
-  private _id: String;
-  private _name: String;
+import ProductInterface from "./product.interface";
+
+export default class Product implements ProductInterface {
+  private _id: string;
+  private _name: string;
   private _price: number;
 
-  constructor(id: String, name: String, price: number) {
+  constructor(id: string, name: string, price: number) {
     this._id = id;
     this._name = name;
     this._price = price;
     this.validate();
   }
 
-  get id(): String {
+  get id(): string {
     return this._id;
   }
-
-  get name(): String {
+  
+  get name(): string {
     return this._name;
   }
 
@@ -22,7 +24,7 @@ export default class Product {
     return this._price;
   }
 
-  changeName(name: String): void {
+  changeName(name: string): void {
     this._name = name;
     this.validate();
   }

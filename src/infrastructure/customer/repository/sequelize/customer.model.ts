@@ -14,22 +14,22 @@ import {
    
     @PrimaryKey
     @Column(DataType.STRING)  
-    declare id: String;
+    declare id: string;
   
     @Column({ allowNull: false })
-    declare name: String;
+    declare name: string;
   
     @Column({ allowNull: false })
-    declare street: String;
+    declare street: string;
   
     @Column({ allowNull: false })
     declare number: number;
   
     @Column({ allowNull: false })
-    declare zipcode: String;
+    declare zipcode: string;
   
     @Column({ allowNull: false })
-    declare city: String;
+    declare city: string;
   
     @Column({ allowNull: false })
     declare active: boolean;

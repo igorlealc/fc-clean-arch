@@ -1,8 +1,9 @@
 import Order from "../../../../domain/checkout/entity/order";
 import OrderItem from "../../../../domain/checkout/entity/order_item";
 import OrderRepositoryInterface from "../../../../domain/checkout/repository/order-repository.interface";
-import OrderItemModel from "./order-item.model";
 import OrderModel from "./order.model";
+import OrderItemModel from "./order-item.model";
+
 
 export default class OrderRepository implements OrderRepositoryInterface {
 
@@ -57,7 +58,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
 
   }
 
-  async find(id: String): Promise<Order> {
+  async find(id: string): Promise<Order> {
     let orderModel;
     try {
       orderModel = await OrderModel.findOne({

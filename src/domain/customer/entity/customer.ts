@@ -1,35 +1,25 @@
-import EventDispatcher from "../../@shared/event/event-dispatcher";
-import CustomerAddressChangedEvent from "../event/customer-address-changed.event";
-import CustomerCreatedEvent from "../event/customer-created.event";
-import ConsoleLogWhenAddressIsChangedHandler from "../event/handler/console-log-when-address-is-changed-handler";
-import ConsoleLogWhenCustomeIsCreated1Handler from "../event/handler/console-log-when-custome-Is-created-1.handler";
-import ConsoleLogWhenCustomeIsCreated2Handler from "../event/handler/console-log-when-custome-Is-created-2.handler";
-import Address from "./address";
+import Entity from "../../@shared/entity/entity.abstract";
+import Address from "../value-object/address";
+import NotificationError from "../../@shared/notification/notification.error";
+import CustomerValidatorFactory from "../factory/customer.validator.factory";
 
-export default class Customer {
-  private _id: String;
-  private _name: String = "";
+export default class Customer extends Entity {
+  private _name: string = "";
   private _address!: Address;
   private _active: boolean = false;
   private _rewardPoints: number = 0;
-  private _eventDispatcher: EventDispatcher = new EventDispatcher();
 
-  constructor(id: String, name: String) {
-    this._configureDomainEvents();
+  constructor(id: string, name: string) {
+    super();
     this._id = id;
     this._name = name;
-    this.validate();    
-    this._eventDispatcher.notify(new CustomerCreatedEvent({
-      id: id,
-      name: name      
-    }));
+    this.validate();
+    if (this.notification.hasErrors()) {
+      throw new NotificationError(this.notification.getErrors());
+    }
   }
 
-  get id(): String {
-    return this._id;
-  }
-
-  get name(): String {
+  get name(): string {
     return this._name;
   }
 
@@ -38,15 +28,10 @@ export default class Customer {
   }
 
   validate() {
-    if (this._id.length === 0) {
-      throw new Error("Id is required");
-    }
-    if (this._name.length === 0) {
-      throw new Error("Name is required");
-    }
+    CustomerValidatorFactory.create().validate(this);
   }
 
-  changeName(name: String) {
+  changeName(name: string) {
     this._name = name;
     this.validate();
   }
@@ -54,14 +39,9 @@ export default class Customer {
   get Address(): Address {
     return this._address;
   }
-  
+
   changeAddress(address: Address) {
     this._address = address;
-    this._eventDispatcher.notify(new CustomerAddressChangedEvent({
-      clientId: this.id,
-      clientName: this.name ,
-      address: address.toString()
-    }));
   }
 
   isActive(): boolean {
@@ -85,11 +65,5 @@ export default class Customer {
 
   set Address(address: Address) {
     this._address = address;
-  }
-
-  _configureDomainEvents(){
-    this._eventDispatcher.register("CustomerCreatedEvent", new ConsoleLogWhenCustomeIsCreated1Handler());
-    this._eventDispatcher.register("CustomerCreatedEvent", new ConsoleLogWhenCustomeIsCreated2Handler());
-    this._eventDispatcher.register("CustomerAddressChangedEvent", new ConsoleLogWhenAddressIsChangedHandler());
   }
 }

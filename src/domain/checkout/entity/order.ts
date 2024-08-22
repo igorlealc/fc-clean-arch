@@ -1,11 +1,11 @@
 import OrderItem from "./order_item";
 export default class Order {
-  private _id: String;
-  private _customerId: String;
+  private _id: string;
+  private _customerId: string;
   private _items: OrderItem[];
   private _total: number;
 
-  constructor(id: String, customerId: String, items: OrderItem[]) {
+  constructor(id: string, customerId: string, items: OrderItem[]) {
     this._id = id;
     this._customerId = customerId;
     this._items = items;
@@ -13,11 +13,11 @@ export default class Order {
     this.validate();
   }
 
-  get id(): String {
+  get id(): string {
     return this._id;
   }
 
-  get customerId(): String {
+  get customerId(): string {
     return this._customerId;
   }
 

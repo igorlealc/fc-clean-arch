@@ -1,16 +1,17 @@
 import { Sequelize } from "sequelize-typescript";
-import Address from "../../../../domain/customer/entity/address";
+import Address from "../../../../domain/customer/value-object/address";
+import Customer from "../../../../domain/customer/entity/customer";
+import OrderItem from "../../../../domain/checkout/entity/order_item";
 import Product from "../../../../domain/product/entity/product";
 import CustomerModel from "../../../customer/repository/sequelize/customer.model";
+import OrderItemModel from "./order-item.model";
 import OrderModel from "./order.model";
 import ProductModel from "../../../product/repository/sequelize/product.model";
 import CustomerRepository from "../../../customer/repository/sequelize/customer.repository";
 import OrderRepository from "./order.repository";
 import Order from "../../../../domain/checkout/entity/order";
-import OrderItemModel from "./order-item.model";
-import Customer from "../../../../domain/customer/entity/customer";
 import ProductRepository from "../../../product/repository/sequelize/product.repository";
-import OrderItem from "../../../../domain/checkout/entity/order_item";
+
 
 describe("Order repository test", () => {
   let sequelize: Sequelize;
@@ -24,10 +25,10 @@ describe("Order repository test", () => {
     });
 
     await sequelize.addModels([
-      CustomerModel,
       OrderModel,
       OrderItemModel,
-      ProductModel,
+      CustomerModel,
+      ProductModel
     ]);
     await sequelize.sync();
   });
@@ -36,6 +37,7 @@ describe("Order repository test", () => {
     await sequelize.close();
   });
 
+ 
   it("should create a order", async () => {
     const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "Customer 1");

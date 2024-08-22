@@ -1,15 +1,15 @@
 export default class OrderItem {
-  private _id: String;
-  private _productId: String;
-  private _name: String;
+  private _id: string;
+  private _productId: string;
+  private _name: string;
   private _price: number;
   private _quantity: number;
 
   constructor(
-    id: String,
-    name: String,
+    id: string,
+    name: string,
     price: number,
-    productId: String,
+    productId: string,
     quantity: number
   ) {
     this._id = id;
@@ -19,15 +19,15 @@ export default class OrderItem {
     this._quantity = quantity;
   }
 
-  get id(): String {
+  get id(): string {
     return this._id;
   }
 
-  get name(): String {
+  get name(): string {
     return this._name;
   }
 
-  get productId(): String {
+  get productId(): string {
     return this._productId;
   }
 
