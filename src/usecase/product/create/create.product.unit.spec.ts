@@ -44,7 +44,7 @@ describe("Unit test create product use case", () => {
     const output = createProductUseCase.execute(nameMisssingInput);
 
     await expect(output).rejects.toThrow(
-      "Name is required"
+      "product: Name is required"
     );
   });
 
@@ -53,7 +53,7 @@ describe("Unit test create product use case", () => {
     const output = createProductUseCase.execute(priceLess0Input);
 
     await expect(output).rejects.toThrow(
-      "Price must be greater than zero"
+      "product: Price must be greater than zero"
     );
   });
 
