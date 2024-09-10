@@ -1,6 +1,6 @@
-import ProductInterface from "./product.interface";
+import ProductValidate from "./product.entity";
 
-export default class ProductB  extends ProductInterface {  
+export default class ProductB  extends ProductValidate {  
   private _name: string;
   private _price: number;
 

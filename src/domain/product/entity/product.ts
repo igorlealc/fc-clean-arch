@@ -1,11 +1,11 @@
-import ProductInterface from "./product.interface";
+import ProductEntity from "./product.entity";
 
-export default class Product extends ProductInterface {
+export default class Product extends ProductEntity {
 
   private _name: string;
   private _price: number;
 
-  constructor(id: string, name: string, price: number) {
+  constructor(id: string, name: string, price: number) {   
     super();
     this._id = id;
     this._name = name;
